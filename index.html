@@ -1,0 +1,37 @@
+<head>
+    <script>
+        function validateForm(form) {
+            var x = document.forms["contact_form"]["honeypot"].value;
+            if (x == "" || x == null) { // if the honeypot was ignored
+                form.action = "https://system.spektrix.com/apitesting/website/secure/signup.aspx";
+                form.method = "POST"
+            }
+            else { // the honeypot was filled in, it's a bot
+                form.action = "https://giphy.com/gifs/S0hxMGYFhEMzm"
+                // link directly to thank you but never sends
+                return false;
+            }
+        }
+    </script>
+
+    <style>
+        input[type="text"]#honeypot {
+            display: none;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form onsubmit="validateForm(this);" name="contact_form">
+        <input type="hidden" name="ReturnUrl" value="https://giphy.com/gifs/human-note-reminder-3o7bu1QBfylzi8MmYw" />
+        First name: <input name="FirstName" type="text" /></br>
+        Last name: <input name="LastName" type="text" /></br>
+        Email address: <input name="Email" type="text" /></br>
+        <input id="honeypot" name="honeypot" type="text" /><br>
+        <input type="submit" value="Signup" />
+    </form>
+
+
+</body>
